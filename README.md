@@ -1,0 +1,1 @@
+# Puppet Ramuplab Vagrant
