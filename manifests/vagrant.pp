@@ -13,5 +13,4 @@ class vagrant_default_classes {
 node 'rampuplab.nespresso.com' {
   include vagrant_default_classes
   include rampuplab
-  class {'rampuplab': } 
 }
