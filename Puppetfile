@@ -5,6 +5,10 @@ mod 'base',
 mod 'hiera',
   :git => 'ssh://git@bitbucket.nespresso.com:7999/pup/puppet-hiera.git'
 
+mod 'java',
+  :git => 'ssh://git@bitbucket.nespresso.com:7999/pup/puppet-java.git',
+  :ref => 'puppet-java-1.29'
+
 mod 'nginx',
   :git => 'ssh://git@bitbucket.nespresso.com:7999/xpup/puppet-nginx.git',
   :ref => 'v0.5.0'
@@ -15,6 +19,10 @@ mod 'puppi',
 
 mod 'rampuplab',
   :git => 'ssh://git@bitbucket.nespresso.com:7999/pup/puppet-rampuplab.git'
+
+mod 'staging',
+  :git => 'ssh://git@bitbucket.nespresso.com:7999/xpup/puppet-staging.git',
+  :ref => '1.0.4'
 
 mod 'stdlib',
   :git => 'ssh://git@bitbucket.nespresso.com:7999/xpup/puppetlabs-stdlib.git',
@@ -27,3 +35,7 @@ mod 'sudo',
 mod 'supervisor',
   :git => 'ssh://git@bitbucket.nespresso.com:7999/pup/puppet-supervisor.git',
   :ref => 'puppet-supervisor-1.18'
+
+mod 'tomcat',
+  :git => 'ssh://git@bitbucket.nespresso.com:7999/xpup/puppetlabs-tomcat.git',
+  :ref => '1.6.1'
