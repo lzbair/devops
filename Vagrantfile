@@ -27,7 +27,6 @@ Vagrant.configure("2") do |config|
   config.vm.define "rampuplab-instance", autostart: true do |rampup|
     rampup.vm.host_name = "rampuplab.nespresso.com"
     rampup.vm.network "private_network", ip: "192.168.56.11"
-#   rampup.vm.provision :shell, :inline => "yum --disablerepo=dev_rhel7-percona install mariadb55"
   end
 
   # create hiera file in vagrant machine
