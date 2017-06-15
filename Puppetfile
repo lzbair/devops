@@ -1,3 +1,7 @@
+mod 'archive',
+  :git => 'ssh://git@bitbucket.nespresso.com:7999/xpup/puppetcommunity-archive.git',
+  :ref => 'v1.3.0'
+
 mod 'base',
   :git => 'ssh://git@bitbucket.nespresso.com:7999/pup/puppet-base.git',
   :ref => 'puppet-base-1.126'
