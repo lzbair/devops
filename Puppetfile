@@ -47,3 +47,9 @@ mod 'supervisor',
 mod 'tomcat',
   :git => 'ssh://git@bitbucket.nespresso.com:7999/xpup/puppetlabs-tomcat.git',
   :ref => '1.6.1'
+
+# Warning: this is not a real puppet module, rather a workaround to deploy
+# user-data scripts on the Openstack VMs created.
+mod 'openstack-user_data',
+  :git => 'ssh://git@bitbucket.nespresso.com:7999/misc/openstack-user_data.git'
+

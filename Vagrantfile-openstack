@@ -1,0 +1,55 @@
+# -*- mode: ruby -*-
+# vi: set ft=ruby :
+
+Vagrant.configure("2") do |config|
+  $username = ENV["OS_USERNAME"]
+  $password = ENV["OS_PASSWORD"]
+  $url = ENV["OS_AUTH_URL"]
+  $tenant = ENV["OS_PROJECT_NAME"]
+  $domain = ENV["OS_USER_DOMAIN_NAME"]
+
+  if $username.nil? or $password.nil? or $url.nil? or $tenant.nil? or $domain.nil?
+    abort("[ERROR] One or more ENV variables needed by Openstack is not set, did you forget to source the Openstack RC file?")
+  end
+
+
+  $user_data = "modules/user_data/user_data.file"
+  if ! File.file?($user_data)
+    abort("[ERROR] Cannot find user_data file to pass to Openstack, did you forget to run r10k?")
+  end
+
+  config.vm.provider "openstack" do |os, override|
+    os.domain_name = $domain
+    os.project_name = $tenant
+    os.identity_api_version = "3"
+    os.password = $password
+    os.username = $username
+    os.tenant_name = $tenant
+    os.openstack_auth_url = "#{$url}"
+    os.flavor = "m1.small"
+    os.security_groups = ["default"]
+    os.user_data=File.read($user_data)
+    override.ssh.insert_key = true
+    override.ssh.username = "cloud-user"
+    if !override.ssh.private_key_path.is_a? String
+      override.ssh.private_key_path = "~/.ssh/id_rsa"
+    end
+  end
+
+  config.vm.define "rampuplab.nespresso.com" do |pro|
+    pro.vm.provider :openstack do |os|
+      os.server_name = "rampuplab.nespresso.com.#{$username}"
+      os.image = "rhel7-vagrant-07"
+    end
+  end
+
+  config.vm.provision :shell, :inline => "ln -sf /vagrant/modules/hiera/hiera-openstack.yaml /etc/puppetlabs/puppet/hiera.yaml"
+
+  # Enable provisioning with Puppet stand alone.
+    config.vm.provision :puppet do |puppet|
+    puppet.manifests_path = "manifests"
+    puppet.module_path = "modules"
+    puppet.manifest_file  = "vagrant.pp"
+    puppet.facter = { "vagrant_box" => true }
+  end
+end
