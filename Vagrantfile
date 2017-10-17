@@ -3,8 +3,8 @@
 
 Vagrant.configure("2") do |config|
 
-  bitbucket.vm.box = "nespresso-basebox-el7"
-  bitbucket.vm.box_url = "http://hqchrepo2.nespresso.com/vagrant-images/nespresso-basebox-el7/current.json
+  config.vm.box = "nespresso-basebox-el7"
+  config.vm.box_url = "http://hqchrepo2.nespresso.com/vagrant-images/nespresso-basebox-el7/current.json"
   config.ssh.insert_key = false
   config.ssh.private_key_path = "./modules/hiera/baseboxes/keys/vagrant_access_rsa"
 
